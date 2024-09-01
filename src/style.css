@@ -1,0 +1,74 @@
+body {
+  font-family: Arial, sans-serif; /* Fuente legible y moderna */
+  font-size: 16px; /* Tamaño de fuente base */
+  line-height: 1.6; /* Espaciado entre líneas */
+  color: #333; /* Color de texto principal */
+  margin: 0; /* Elimina márgenes por defecto */
+  padding: 0; /* Elimina relleno por defecto */
+  background-color: #f5f5f5; /* Color de fondo neutro */
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0; /* Elimina márgenes superiores */
+  margin-bottom: 0.5em; /* Añade margen inferior */
+  font-weight: bold; /* Negrita para los títulos */
+}
+
+h1 {
+  font-size: 2em; /* Tamaño grande para h1 */
+}
+
+h2 {
+  font-size: 1.75em; /* Tamaño menor para h2 */
+}
+
+h3 {
+  font-size: 1.5em; /* Tamaño para h3 */
+}
+
+a {
+  color: #007bff; /* Color de enlace */
+  text-decoration: none; /* Elimina subrayado */
+  transition: color 0.3s; /* Transición suave */
+}
+
+a:hover, a:focus {
+  text-decoration: underline; /* Subrayado en hover/focus */
+  color: #0056b3; /* Color en hover/focus */
+}
+input, textarea, select {
+  font-family: inherit; /* Usa la misma fuente que el resto del texto */
+  font-size: inherit; /* Tamaño de fuente heredado */
+  border: 1px solid #ccc; /* Borde de formulario */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+  width: 100%; /* Ancho completo */
+  box-sizing: border-box; /* Incluye el borde en el ancho total */
+  margin-bottom: 10px; /* Espaciado inferior */
+  background-color: #fff; /* Fondo blanco */
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #007bff; /* Color de borde en foco */
+  outline: none; /* Elimina contorno en foco */
+}
+ul, ol {
+  padding-left: 20px; /* Espaciado izquierdo */
+  margin-bottom: 10px; /* Espaciado inferior */
+}
+
+table {
+  width: 100%; /* Ancho completo */
+  border-collapse: collapse; /* Elimina el espacio entre bordes */
+  margin-bottom: 20px; /* Espaciado inferior */
+}
+
+th, td {
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ddd; /* Borde de celdas */
+  text-align: left; /* Alineación del texto */
+}
+
+th {
+  background-color: #f2f2f2; /* Fondo para encabezados de tabla */
+}
+

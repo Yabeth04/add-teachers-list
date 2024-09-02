@@ -1,9 +1,9 @@
 <template>
-  <HelloWorld msg="Vite + Vue" />
+  <notifications />
+  <router-view/>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import HelloWorld from './components/Login_users.vue';
 
 export default {
   components: {

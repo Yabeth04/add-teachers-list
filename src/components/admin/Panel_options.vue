@@ -5,7 +5,7 @@
         <div class="border rounded p-4 shadow" style="background-color: #f8f9fa;">
             <h5 class="text-center mb-4">Seleccione una opción</h5>
             <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-outline-primary mx-2" v-for="(item,key) in menu" :key="key" @click="options(item.value)">{{ item.name}}<i :class="item.icon"></i></button>
+                <button type="button" class="btn btn-outline-primary mx-2" v-for="(item,key) in menu" :key="key" @click="options(item.value)">{{ item.name}}<i :class="item.icon" class="ml-2" ></i></button>
             </div>
         </div>
     </div>

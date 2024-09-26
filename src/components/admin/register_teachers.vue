@@ -5,86 +5,49 @@
     <div class="container full-height justify-content-center">
         <div class="text-center">
             <h2 class="title">Añade Profesores al Sistema</h2>
-
+            <!-- row 1 -->
             <div class="row mb-3">
                 <div class="col">
                     <div class="input-group">
-                        <div class="input-group-prepend">
+                        <div class="input-group-prepend mr-5" v-for="(item, key) in form.first_row">
                             <span class="input-group-text d-flex justify-content-center align-items-center">
-                                <i class="fas fa-user"></i>
+                                <i :class="item.icon"></i>
                             </span>
+                            <input type="text" class="form-control" :key="key" :placeholder="item.placeholder"
+                                aria-label="Nombre" v-model="formData[item.model]">
                         </div>
-                        <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text d-flex justify-content-center align-items-center">
-                                <i class="fas fa-user"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Apellidos" aria-label="Apellidos">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text d-flex justify-content-center align-items-center">
-                                <i class="fas fa-calendar-alt"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Edad" aria-label="Edad">
                     </div>
                 </div>
             </div>
-
+            <!-- row 2 -->
             <div class="row mb-3">
                 <div class="col">
                     <div class="input-group">
-                        <div class="input-group-prepend">
+                        <div class="input-group-prepend mr-5" v-for="(item, key) in form.second_row">
                             <span class="input-group-text d-flex justify-content-center align-items-center">
-                                <i class="fas fa-id-card"></i>
+                                <i :class="item.icon"></i>
                             </span>
+                            <input type="text" class="form-control" :key="key" :placeholder="item.placeholder"
+                                aria-label="Apellidos" v-model="formData[item.model]">
                         </div>
-                        <input type="text" class="form-control" placeholder="Cédula" aria-label="Cédula">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text d-flex justify-content-center align-items-center">
-                                <i class="fas fa-phone"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Teléfono" aria-label="Teléfono">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text d-flex justify-content-center align-items-center">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Correo Electrónico"
-                            aria-label="Correo Electrónico">
                     </div>
                 </div>
             </div>
-
-            <div class="row mb-2">
+            <!-- row 3 -->
+            <div class="row mb-3">
                 <div class="col">
                     <div class="input-group">
-                        <div class="input-group-prepend">
+                        <div class="input-group-prepend mr-5" v-for="(item, key) in form.third_row">
                             <span class="input-group-text d-flex justify-content-center align-items-center">
-                                <i class="fas fa-chalkboard-teacher"></i>
+                                <i :class="item.icon"></i>
                             </span>
+                            <input type="text" class="form-control" :key="key" :placeholder="item.placeholder"
+                                aria-label="Apellidos" v-model="formData[item.model]">
                         </div>
-                        <input type="text" class="form-control" placeholder="Especialidad" aria-label="Especialidad">
                     </div>
                 </div>
             </div>
+            <button type="button" class="btn btn-success d-flex mb-3 " @click="addTeacher()">Añadir Profesor</button>
 
             <!-- Tabla -->
             <table class="table mx-auto">
@@ -100,32 +63,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>30</td>
-                        <td>123456789</td>
-                        <td>(555) 123-4567</td>
-                        <td>john.doe@example.com</td>
-                        <td>Matemáticas</td>
-                    </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>28</td>
-                        <td>987654321</td>
-                        <td>(555) 765-4321</td>
-                        <td>mary.moe@example.com</td>
-                        <td>Historia</td>
-                    </tr>
-                    <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>35</td>
-                        <td>555555555</td>
-                        <td>(555) 555-5555</td>
-                        <td>july.dooley@example.com</td>
-                        <td>Ciencias</td>
+                    <tr  v-for="(item, key) in teachers" :key="key">
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.surnames }}</td>
+                        <td>{{ item.age }}</td>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.phone }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.speciality }}</td>
+
                     </tr>
                 </tbody>
             </table>
@@ -138,26 +84,50 @@ export default {
     name: 'register_teachers',
     data() {
         return {
+            formData: {
+                nombre: '',
+                surnames: '',
+                age: '',
+                id: '',
+                phone: '',
+                email: '',
+                speciality: ''
+            },
             form: {
                 first_row: [
-                    { name: 'Nombre', icon: 'fas fa-user', placeholder: 'nombre' },
-                    { name: 'Apellidos', icon: 'fas fa-user', placeholder: 'apellidos' },
-                    { name: 'Edad', icon: 'fas fa-calendar-alt', placeholder: 'edad' }
+                    { title: 'Nombre', icon: 'fas fa-user', placeholder: 'Nombre', model: 'nombre' },
+                    { title: 'Apellidos', icon: 'fas fa-user', placeholder: 'Apellidos', model: 'surnames' },
+                    { title: 'Edad', icon: 'fas fa-user', placeholder: 'Edad', model: 'age' }
                 ],
                 second_row: [
-                    { name: 'Cédula', icon: 'fas fa-id-card', placeholder: 'cédula' },
-                    { name: 'Teléfono', icon: 'fas fa-phone', placeholder: 'teléfono' },
-                    { name: 'Correo Electrónico', icon: 'fas fa-envelope', placeholder: 'correo electrónico' }
+                    { title: 'Cédula', icon: 'fas fa-id-card', placeholder: 'Cédula', model: 'id' },
+                    { title: 'Teléfono', icon: 'fas fa-phone', placeholder: 'Teléfono', model: 'phone' },
+                    { title: 'Correo Electrónico', icon: 'fas fa-envelope', placeholder: 'Correo Electrónico', model: 'email' }
                 ],
                 third_row: [
-                    { name: 'Especialidad', icon: 'fas fa-chalkboard-teacher', placeholder: 'especialidad' }
+                    { title: 'Especialidad', icon: 'fas fa-chalkboard-teacher', placeholder: 'Especialidad', model: 'speciality' },
                 ]
-            }
+            },
+            teachers: [],
         }
     },
     methods: {
         back_menu() {
             this.$router.push('/panel2')
+        },
+        addTeacher() {
+            this.teachers.push({...this.formData})
+
+            //limpia formulario
+            this.formData = {
+                nombre: '',
+                surnames:'',
+                age:'',
+                id:'',
+                phone:'',
+                email:'',
+                speciality:''
+            }
         }
     }
 }
